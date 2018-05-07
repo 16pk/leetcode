@@ -4,15 +4,13 @@
 @author: hongjian.liu
 @date:   2018/5/7
 """
-import logging
 import json
 import collections
-import string
 import time
 
 
 class Solution(object):
-    def findLadders(self, start_word, end_word, word_dict):
+    def findLadders(self, start_word, end_word, word_list):
         word_set = set(word_list)
         if end_word not in word_set:
             return []
@@ -22,7 +20,6 @@ class Solution(object):
         parents = collections.defaultdict(list)
         while not bool(used_word_set[0] & used_word_set[1]):
             meta_set = set()
-            meta_dict = {}
             new_que_list = []
             for crt_que in half_results[flop]:
                 tgt_word = crt_que[-1]
