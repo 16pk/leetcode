@@ -28,7 +28,10 @@ class Solution(object):
                 return []
             layers[flop].append(next_layer)
             used_word[flop].update(next_layer)
-            flop = (flop + 1) % 2
+            if len(layers[0][-1]) > len(layers[1][-1]):
+                flop = 1
+            else:
+                flop = 0
         overlapped = layers[0][-1] & layers[1][-1]
         for crt_word in overlapped:
             for new_word in self.similar_word(crt_word, word_set):
@@ -50,13 +53,10 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    # start_word = "nanny"
-    # end_word = "aloud"
-    # with open('word_list.json') as fp:
-    #     word_list = json.load(fp)
-    start_word = "hit"
-    end_word = "cog"
-    word_list = ["hot", "dot", "dog", "lot", "log", "cog"]
+    start_word = "nanny"
+    end_word = "aloud"
+    with open('word_list.json') as fp:
+        word_list = json.load(fp)
     print(len(word_list))
     sample = Solution()
     tic = time.clock()
